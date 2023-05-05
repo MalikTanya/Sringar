@@ -15,7 +15,7 @@ connectDB();
 
 const app = express();
 const options = {
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://sringar12.vercel.app"],
   useSuccessStatus: true,
 };
 
