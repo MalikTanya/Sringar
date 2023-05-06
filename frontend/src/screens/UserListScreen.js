@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { Button, Table } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listUsers, deleteUser } from "../actions/userActions";
+import { Table } from "antd";
+import { TiTick } from "react-icons/ti";
+import { AiOutlineClose } from "react-icons/ai";
+import { BiEdit } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 
 const UserListScreen = () => {
   const dispatch = useDispatch();
@@ -26,6 +30,7 @@ const UserListScreen = () => {
     } else {
       history("/login");
     }
+    console.log(userInfo);
   }, [dispatch, history, successDelete, userInfo]);
 
   const deleteHandler = (id) => {
@@ -33,60 +38,56 @@ const UserListScreen = () => {
       dispatch(deleteUser(id));
     }
   };
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "_id",
+      key: "_id",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Admin",
+      dataIndex: "isAdmin",
+      key: "isAdmin",
+      render: (admin) =>
+        admin ? (
+          <TiTick className="text-green-600 text-2xl" />
+        ) : (
+          <AiOutlineClose className="text-red-600 text-2xl" />
+        ),
+    },
+    {
+      title: "Options",
+      dataIndex: "_id",
+      key: "_id",
+      render: (id) => (
+        <div className="flex items-center">
+          <Link to={`/admin/user/${id}/edit`}>
+            <BiEdit className="text-blue-600 text-2xl mr-3 cursor-pointer" />
+          </Link>
+          <MdDelete
+            className="text-red-600 text-2xl cursor-pointer"
+            onClick={deleteHandler}
+          />
+        </div>
+      ),
+    },
+  ];
 
   return (
-    <>
-      <h1>Users</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <Table striped bordered hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>ADMIN</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>
-                  <a href={`mailto:${user.email}`}>{user.email}</a>
-                </td>
-                <td>
-                  {user.isAdmin ? (
-                    <i className="fa fa-check" style={{ color: "green" }}></i>
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant="light" className="btn-sm">
-                      <i className="fas fa-edit"></i>
-                    </Button>
-                  </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandler(user._id)}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
-    </>
+    <div className="mt-[60px] px-24">
+      <h1 className="mt-4 mb-4">Users</h1>
+      <Table dataSource={users} columns={columns} />;
+    </div>
   );
 };
 

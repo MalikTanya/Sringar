@@ -16,7 +16,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = ({ match }) => {
   const [qty, setQty] = useState(1);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState();
   const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
@@ -49,8 +49,7 @@ const ProductScreen = ({ match }) => {
     navigate(`/cart/${id}?qty=${qty}`);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = () => {
     dispatch(
       createProductReview(id, {
         rating,
@@ -77,7 +76,7 @@ const ProductScreen = ({ match }) => {
         <img
           src={product?.image}
           alt={product?.name}
-          className="w-[600px] h-[400px] object-cover rounded-xl"
+          className="w-[600px] h-[490px] object-cover rounded-xl"
         />
 
         <div>
@@ -156,7 +155,7 @@ const ProductScreen = ({ match }) => {
             <div className="flex flex-col w-[30%] mt-3">
               <Select
                 defaultValue="Select"
-                onChange={submitHandler}
+                onChange={(value) => setRating(value)}
                 options={[
                   {
                     value: "1",

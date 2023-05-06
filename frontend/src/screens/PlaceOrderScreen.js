@@ -52,7 +52,7 @@ const PlaceOrderScreen = () => {
   };
 
   return (
-    <div className="mt-24 md:px-24 sm:px-12 px-6 grid grid-cols-3 gap-5">
+    <div className="mt-24 md:px-24 sm:px-12 px-6 grid grid-cols-3,flex-col items-center gap-5">
       <CheckoutSteps step1 step2 step3 step4 />
       <div className="col-span-2">
         <h1 className="font-bold text-xl text-center">Order Details</h1>

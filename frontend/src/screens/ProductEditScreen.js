@@ -92,105 +92,98 @@ const ProductEditScreen = (match) => {
     );
   };
   return (
-    <>
+    <div className="mt-[60px] px-24">
       <Link to="/admin/productlist" className="btn btn=light my-3">
-        Go Back
+        <button className="border border-blue-500 rounded-md px-4 py-2 mb-4">
+          Go Back
+        </button>
       </Link>
-      <FormContainer>
-        <h1>Edit Product</h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">{error}</Message>
-        ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter name"
+      <h1>Edit Product</h1>
+      {loadingUpdate && <Loader />}
+      {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <div>
+          <form action="" className="flex flex-col items-center">
+            <div className="flex flex-col">
+              <label className="font-semibold" htmlFor="">
+                Name
+              </label>
+              <input
+                type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="price">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter price"
+                className="mt-1 outline-none border w-[400px] border-blue-500 rounded-md px-4 py-2"
+              />
+            </div>
+            <div className="flex flex-col mt-3">
+              <label className="font-semibold" htmlFor="">
+                Price
+              </label>
+              <input
+                type="text"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="image">
-              <Form.Label>Image</Form.Label>
-              <Form.Control
+                className="mt-1 outline-none border w-[400px] border-blue-500 rounded-md px-4 py-2"
+              />
+            </div>
+            <div className="flex flex-col mt-3">
+              <label className="font-semibold" htmlFor="">
+                Brand
+              </label>
+              <input
                 type="text"
-                placeholder="Enter Image URL"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              ></Form.Control>
-              {/* <Form.File
-                id="image-file"
-                label="Choose file"
-                custom
-                onChange={uploadFileHandler}
-              >
-                {uploading && <Loader />}
-              </Form.File> */}
-            </Form.Group>
-
-            <Form.Group controlId="brand">
-              <Form.Label>Brand</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="category">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
+                className="mt-1 outline-none border w-[400px] border-blue-500 rounded-md px-4 py-2"
+              />
+            </div>
+            <div className="flex flex-col mt-3">
+              <label className="font-semibold" htmlFor="">
+                Category
+              </label>
+              <input
                 type="text"
-                placeholder="Enter category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="countInStock">
-              <Form.Label>CountInStock</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter CountInStock"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="description">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
+                className="mt-1 outline-none border w-[400px] border-blue-500 rounded-md px-4 py-2"
+              />
+            </div>
+            <div className="flex flex-col mt-3">
+              <label className="font-semibold" htmlFor="">
+                Description
+              </label>
+              <textarea
                 type="text"
-                placeholder="Enter Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Button type="submit" variant="primary">
+                className="mt-1 outline-none border w-[400px] h-[150px] border-blue-500 rounded-md px-4 py-2"
+              />
+            </div>
+            <div className="flex flex-col mt-3">
+              <label className="font-semibold" htmlFor="">
+                Count InStock
+              </label>
+              <input
+                type="text"
+                value={category}
+                onChange={(e) => setCountInStock(e.target.value)}
+                className="mt-1 outline-none border w-[400px] border-blue-500 rounded-md px-4 py-2"
+              />
+            </div>
+            <button
+              onClick={submitHandler}
+              className="text-white px-4 py-2 bg-blue-500 rounded-md"
+            >
               Update
-            </Button>
-          </Form>
-        )}
-      </FormContainer>
-    </>
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
   );
 };
 

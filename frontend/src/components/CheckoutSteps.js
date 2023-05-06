@@ -15,8 +15,8 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
     marginTop: 16,
   };
   return (
-    <div className="flex flex-row">
-      <Steps className="px-8">
+    <div className="flex flex-row ">
+      <div className="px-8">
         {step1 ? (
           <Link to="/login">
             <h3>Sign In</h3>
@@ -24,9 +24,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         ) : (
           <h3 className="disabled">Sign In</h3>
         )}
-      </Steps>
+      </div>
 
-      <Steps className="px-8">
+      <div className="px-8">
         {step2 ? (
           <Link to="/shipping">
             <h3>Shipping</h3>
@@ -34,9 +34,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         ) : (
           <h3 className="disabled">Shipping</h3>
         )}
-      </Steps>
+      </div>
 
-      <Steps className="px-8">
+      <div className="px-8">
         {step3 ? (
           <Link to="/payment">
             <h3>Payment</h3>
@@ -44,9 +44,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         ) : (
           <h3 className="disabled">Payment</h3>
         )}
-      </Steps>
+      </div>
 
-      <Steps className="px-8">
+      <div className="px-8">
         {step4 ? (
           <Link to="/placeorder">
             <h3>Place Order</h3>
@@ -54,7 +54,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
         ) : (
           <h3 className="disabled">Place Order</h3>
         )}
-      </Steps>
+      </div>
     </div>
   );
 };

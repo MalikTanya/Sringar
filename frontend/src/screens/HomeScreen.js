@@ -12,8 +12,8 @@ import ShowCase from "../components/ShowCase";
 import ProductCarousel from "../components/ProductCarousel";
 import Feature from "../components/Feature";
 
-const HomeScreen = () => {
-  const keyword = useParams();
+const HomeScreen = ({ search }) => {
+  const { keyword } = useParams();
   const pageNumber = useParams() || 1;
 
   const dispatch = useDispatch();
@@ -26,19 +26,25 @@ const HomeScreen = () => {
 
   return (
     <div className="w-[100vw]">
-      {/* <Meta /> */}
-      {/* <Link to="/" className="btn btn-light">
-        Go Back
-      </Link> */}
-      <Hero />
-      <Feature />
-      <ProductCarousel />
-      <ShowCase />
-      <h2 className="font-bold text-4xl text-center">Latest Products</h2>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
+      {!search ? (
+        <>
+          <Hero />
+          <Feature />
+          <ProductCarousel />
+          <ShowCase />
+          <h2 className="font-bold text-4xl text-center">Latest Products</h2>
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant="danger">{error}</Message>
+          ) : (
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-8 gap-4">
+              {products.map((product, i) => {
+                return <Product product={product} key={i} />;
+              })}
+            </div>
+          )}
+        </>
       ) : (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-8 gap-4">
           {products.map((product, i) => {

@@ -24,7 +24,7 @@ const ShippingScreen = () => {
   };
 
   return (
-    <div className="mt-24 md:px-24 sm:px-12 px-6 flex justify-center">
+    <div className="mt-24 md:px-24 sm:px-12 px-6 flex flex-col items-center justify-center">
       <CheckoutSteps step1 step2 />
 
       <div className="flex flex-col w-[450px]">

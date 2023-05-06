@@ -24,10 +24,13 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/search/:keyword" Component={HomeScreen} exact />
-          <Route path="/page/:pageNumber" Component={HomeScreen} />
-          <Route path="/" Component={HomeScreen} exact />
-          <Route path="/search/:keyword" Component={HomeScreen} />
+          <Route path="/" exact element={<HomeScreen />} />
+          <Route
+            path="/search/:keyword"
+            exact
+            element={<HomeScreen search />}
+          />
+          {/* <Route path="/page/:pageNumber" element={<HomeScreen search />} /> */}
           <Route
             path="/admin/productlist"
             Component={ProductListScreen}

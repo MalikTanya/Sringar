@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-//import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalButton } from "react-paypal-button-v2";
 import { Alert } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -102,15 +102,15 @@ const OrderScreen = ({ match }) => {
               <div>
                 <p>
                   <strong>Name : </strong>
-                  {order?.user.name}
+                  {order?.user?.name}
                 </p>
                 <strong>
                   Mail :{" "}
                   <a
-                    href={`mailto:${order?.user.email}`}
+                    href={`mailto:${order?.user?.email}`}
                     className="font-normal"
                   >
-                    {order?.user.email}
+                    {order?.user?.email}
                   </a>
                 </strong>
               </div>
@@ -210,11 +210,11 @@ const OrderScreen = ({ match }) => {
               </div>
               {!order.isPaid && (
                 <div>
-                  {/* {loadingPay && <Loader />} */}
-                  {/* <PayPalButton
-                    amount={order.totalPrice}
+                  {loadingPay && <Loader />}
+                  <PayPalButton
+                    amount={order?.totalPrice}
                     onSuccess={successPaymentHandler}
-                  /> */}
+                  />
                 </div>
               )}
             </div>

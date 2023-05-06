@@ -26,10 +26,10 @@ const PaymentScreen = () => {
   };
 
   return (
-    <div className="mt-24 md:px-24 sm:px-12 px-6 flex justify-center">
+    <div className="mt-24 md:px-24 sm:px-12 px-6 flex flex-col items-center justify-center">
       <CheckoutSteps step1 step2 step3 />
       <div className="flex flex-col ">
-        <h2 className="text-xl font-bold">Payment Method</h2>
+        <h2 className="text-xl font-bold mt-6">Payment Method</h2>
 
         <label htmlFor="" className="my-2">
           <input

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, Table, Row, Col } from "react-bootstrap";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -12,6 +10,9 @@ import {
   createProduct,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import { BiEdit } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
+import { Table } from "antd";
 
 const ProductListScreen = () => {
   const pageNumber = useParams() || 1;
@@ -72,18 +73,56 @@ const ProductListScreen = () => {
     dispatch(createProduct());
   };
 
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "_id",
+      key: "_id",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      render: (price) => <p className="font-semibold">${price}</p>,
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+    },
+    {
+      title: "Options",
+      dataIndex: "_id",
+      key: "_id",
+      render: (id) => (
+        <div className="flex items-center">
+          <Link to={`/admin/product/${id}/edit`}>
+            <BiEdit className="text-blue-600 text-2xl mr-3 cursor-pointer" />
+          </Link>
+          <MdDelete
+            className="text-red-600 text-2xl cursor-pointer"
+            onClick={deleteHandler}
+          />
+        </div>
+      ),
+    },
+  ];
   return (
-    <>
-      <Row className="align-items-center">
-        <Col>
-          <h1>Products</h1>
-        </Col>
-        <Col className="text-right">
-          <Button className="my-3" onClick={createProductHandler}>
-            <i className="fas fa-plus">Create Product</i>
-          </Button>
-        </Col>
-      </Row>
+    <div className="mt-[60px] px-24">
+      <div className="flex justify-between mb-3">
+        <h2>Products</h2>
+        <button
+          className="border-blue-500 border px-4 py-2 hover:bg-blue-500 hover:text-white"
+          onClick={createProductHandler}
+        >
+          Create Product
+        </button>
+      </div>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loadingCreate && <Loader />}
@@ -95,47 +134,10 @@ const ProductListScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped bordered hover responsive className="table-sm">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>${product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
-                  <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </LinkContainer>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => deleteHandler(product._id)}
-                    >
-                      <i className="fas fa-trash"></i>
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <Paginate pages={pages} page={page} isAdmin={true} />
+          <Table dataSource={products} columns={columns} />;
         </>
       )}
-    </>
+    </div>
   );
 };
 
