@@ -76,7 +76,7 @@ const UserListScreen = () => {
           </Link>
           <MdDelete
             className="text-red-600 text-2xl cursor-pointer"
-            onClick={deleteHandler}
+            onClick={() => deleteHandler(id)}
           />
         </div>
       ),

@@ -8,7 +8,9 @@ const Footer = () => {
   console.log(pathname.split("/"));
   return (
     <footer
-      className={` flex justify-center flex-col items-center bg-black mt-8  h-[90px] text-white`}
+      className={`${
+        pathname.split("/")[1] !== "" && "fixed left-0 right-0 bottom-0"
+      } flex justify-center flex-col items-center bg-black mt-8  h-[90px] text-white`}
     >
       <div className="flex my-4 ">
         <BsInstagram className="mx-4 text-3xl" />
