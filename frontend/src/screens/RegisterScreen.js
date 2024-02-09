@@ -29,7 +29,7 @@ const RegisterScreen = () => {
   }, [history, userInfo, redirect]);
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (!name || !email || !password) {
       setMessage("Passwords do not match");
     } else {
       dispatch(register(name, email, password));
