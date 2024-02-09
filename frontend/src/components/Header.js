@@ -46,6 +46,7 @@ const Header = () => {
       key: "2",
       label: <p onClick={logoutHandler}>Logout</p>,
     },
+    userInfo?.isAdmin&&
     {
       key: "3",
       label: <p>Dashboard</p>,
